@@ -67,11 +67,13 @@ import { IdmModule } from "./idm/idm.module";
     }),
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: process.env.DB_HOST || "localhost",
-      port: parseInt(process.env.DB_PORT) || 3306,
-      username: process.env.DB_USER || "root",
-      password: process.env.DB_PASSWORD || "z10mz10m",
-      database: process.env.DB_NAME || "good_point",
+      host: process.env.DB_HOST || process.env.MYSQLHOST || "localhost",
+      port: parseInt(process.env.DB_PORT || process.env.MYSQLPORT) || 3306,
+      username: process.env.DB_USER || process.env.MYSQLUSER || "root",
+      password:
+        process.env.DB_PASSWORD || process.env.MYSQLPASSWORD || "z10mz10m",
+      database:
+        process.env.DB_NAME || process.env.MYSQLDATABASE || "good_point",
       ssl:
         process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false,
       logging: process.env.DB_LOGGING && JSON.parse(process.env.DB_LOGGING),
