@@ -1,17 +1,21 @@
-import { WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
-import { Server } from 'http';
+import { WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
+import { Server } from "http";
 @WebSocketGateway({
-    cors: {
-        origin: '*',
-    },
+  cors: {
+    origin: ["http://localhost:3000", "https://goodpoint-frontend.vercel.app"],
+    credentials: true,
+  },
 })
 export class TeachersGoodPointsGateway {
-    @WebSocketServer()
-    server: Server;
+  @WebSocketServer()
+  server: Server;
 
-    //called when a new gp was saved , then send a notification to receiver
+  //called when a new gp was saved , then send a notification to receiver
 
-    handleMessage(data: { gpId: number; receiverId: string; schoolId: number }) {
-        this.server.emit(`received-message/${data.receiverId}`, { gpId: data.gpId, schoolId: data.schoolId });
-    }
+  handleMessage(data: { gpId: number; receiverId: string; schoolId: number }) {
+    this.server.emit(`received-message/${data.receiverId}`, {
+      gpId: data.gpId,
+      schoolId: data.schoolId,
+    });
+  }
 }
