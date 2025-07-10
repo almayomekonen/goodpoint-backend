@@ -311,7 +311,7 @@ export class ClassesService {
         starredUserClasses: {
           userId: teacherId,
         },
-        school: { id: schoolId },
+        schoolId: schoolId,
       },
       relations: { starredUserClasses: true },
     });
