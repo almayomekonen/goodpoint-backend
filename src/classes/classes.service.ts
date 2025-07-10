@@ -338,12 +338,12 @@ export class ClassesService {
       }),
       this.studyGroupService.getAllSchoolStudyGroups(schoolId),
     ]);
-    const studyGroups = groups.map((val) => {
-      return { id: val.id, name: val.name, grades: val.grades };
+    const studyGroups = (groups || []).map((val) => {
+      return { id: val.id, name: val.name, grades: val.grades || [] };
     });
     return {
-      classes,
-      grades: this.getGradeFilterArray(classes),
+      classes: classes || [],
+      grades: this.getGradeFilterArray(classes || []),
       studyGroups: studyGroups,
     };
   }
