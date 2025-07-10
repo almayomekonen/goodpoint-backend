@@ -37,7 +37,15 @@ async function bootstrap() {
     },
     credentials: true, // מאפשר cookies
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+      "Accept-Language",
+      "Origin",
+      "Cache-Control",
+    ],
   });
 
   app.useGlobalPipes(new ValidationPipe());
